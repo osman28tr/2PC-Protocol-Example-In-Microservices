@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="Coordinator/Coordinator.csproj" />
+  <Project Path="Order.API/Order.API.csproj" />
+  <Project Path="Payment.API/Payment.API.csproj" />
+  <Project Path="Stock.API/Stock.API.csproj" />
+</Solution>
