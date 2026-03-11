@@ -2,20 +2,25 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+app.MapGet("/ready", () =>
 {
-	app.MapOpenApi();
-}
+	Console.WriteLine("Order service is ready");
+	return true;
+});
 
-app.UseAuthorization();
+app.MapGet("/commit", () =>
+{
+	Console.WriteLine("Order service is commited");
+	return true;
+});
 
-app.MapControllers();
+app.MapGet("/rollback", () =>
+{
+	Console.WriteLine("Order service is rollbacked");
+});
 
 app.Run();
