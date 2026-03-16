@@ -7,3 +7,14 @@
 <p align="justify"><b>StrongConsistency</b>, mikroservisler arası veri tutarlılığını sağlamak için kullanılan bir yaklaşımdır.Eventual consistency’e nazaran servisler arasında sıkı bir işlem bağımlılığı söz konusu ise kullanılır yani eventual consistecy’de tolere edilen zamansal fark burada söz konusu değildir. Her bir mikroservis ilgili işlemi bir bütün olarak ele alır, ya veri tutarlılığı sağlanır ya da sağlanamaz. Strong Consistency'de ilgili işlem bütün olarak ele alınıp bunun neticesinde tüm servisler'e aynı anda müdahale edilip servisler'de kitlenme durumu oluşacağından bu yaklaşımda performans düşüşü görülebilmektedir. <b>2PC protokolü</b> ise strong consistency yaklaşımının implemente edilmiş halidir. 2PC protokolünde sistemimizde mevcut olan mikroservislere ek olarak bir de <b>coordinator servis'imiz</b> bulunmaktadır. Coordinator servis'i transaction'ı başlatır ve sonuna kadar her aşamayı koordine eder, başlangıçta her bir mikroservis'in transaction için hazırlık durumunu kontrol eder, hepsinden onay gelmesi durumunda transaction'ı başlatır işlem sonunda tüm mikroservisler olumlu dönerse işlem başarıyla tamamlanır, bir mikroservis'den bile olumsuz dönmesi veya yanıt alınamaması durumunda ise transaction başarısız olur ve ilgili mikroservislerde yapılan tüm işlemler rollback ile geri alınır(compensable transaction). 2PC protokolü Prepare Phase ve Commit Phase olmak üzere iki aşamadan oluşmaktadır. Prepare aşamasında koordinator, transaction'a katılan her bir mikroservis'in bu işlem için hazır olup olmadıkları bilgisini alır, mikroservisler'in en az birinden olumsuz yanıt gelmesi veya yanıt alınamaması durumunda ise transaction işlemi başlamaz, iptal olur. Koordinator tüm mikroservislerden olumlu yanıt alması durumunda ise Commit Phase aşaması başlar, bu aşamada ilgili transaction'a katılan mikroservisler'in işlemlerine başlaması için her birine commit mesajı gönderilir. Koordinator, mikroservislerden olumlu yanıt gelmesi üzerine transaction'ı tamamlar ve kullanıcıya başarılı durumunu döner ancak mikroservislerin en az birinden yanıt gelmemesi veya olumsuz gelmesi üzerine tüm mikroservislerin işlemlerini geri alması için rollback mesajı gönderir.</p>
 
 <h1>3- Akış Şeması</h1>
+<img src="images/2PCProtocolSchema.png">
+<h1>4- Projenin İşleyişi</h1>
+<h1>5- Kullanılan Teknolojiler</h1>
+<ul>
+<li>Asp.Net Core API 9.0</li>
+<li>RabbitMQ - MassTransit</li>
+<li>Asp.Net InMemory Cache</li>
+<li>MSSQL</li>
+<li>Ef Core 9.0</li>
+<li>Microservices</li>
+</ul>
