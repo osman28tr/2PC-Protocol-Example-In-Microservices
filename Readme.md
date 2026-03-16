@@ -14,7 +14,6 @@
 <ul>
 <li>Asp.Net Core API 9.0</li>
 <li>RabbitMQ - MassTransit</li>
-<li>Asp.Net InMemory Cache</li>
 <li>MSSQL</li>
 <li>Ef Core 9.0</li>
 <li>Microservices</li>
